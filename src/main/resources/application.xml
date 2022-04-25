@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean id="defaultBean" class="com.myohtet.bean.Zoo"></bean>
+
+	<bean id="defaultConstructorBean" class="com.myohtet.bean.Zoo"></bean>
+
+	<bean id="ConstructorArgBean" class="com.myohtet.bean.Zoo">
+		<constructor-arg value="100"></constructor-arg>
+	</bean>
+
+	<bean id="staticDefaultFactory"
+		class="com.myohtet.bean.ZooStaticFactory"
+		factory-method="factoryDefaultZoo"></bean>
+
+	<bean id="staticArgFactory"
+		class="com.myohtet.bean.ZooStaticFactory"
+		factory-method="zooCountAnimal">
+		<constructor-arg value="100"></constructor-arg>
+	</bean>
+     
+     <!--  This is called factory bean for instanceBean-->
+	<bean id="zooFactory" class="com.myohtet.bean.ZooInstanceFactory">
+		<constructor-arg value="SMALL"></constructor-arg>
+	</bean>
+	
+	<bean id="instanceDefaultBean" factory-method="getZoo" factory-bean="zooFactory"></bean>
+	
+	<bean id="instanceArgDefault" factory-bean="zooFactory" factory-method="getZoo">
+	<constructor-arg value="10"></constructor-arg>
+	</bean>
+</beans>
